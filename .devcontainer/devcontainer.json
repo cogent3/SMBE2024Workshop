@@ -4,6 +4,7 @@
       "dockerfile": "Dockerfile",
       "context": ".."
     },
+    "runArgs": ["--cpus", "2", "-m", "4g"],
     "settings": {
       "terminal.integrated.defaultProfile.linux": "zsh",
       "terminal.integrated.profiles.linux": {
@@ -11,12 +12,12 @@
           "path": "zsh"
         }
       },
-      "python.defaultInterpreterPath": "/home/user/c3/bin/python",
+      "python.defaultInterpreterPath": "/home/user/miniforge3/envs/c312/bin/python",
     },
     "extensions": [
       "ms-python.python",
       "ms-toolsai.jupyter"
     ],
     "remoteUser": "user",
-    "postStartCommand": "echo 'Cogent3 Workshop 2023 environment is ready!'"
+    "postStartCommand": "echo 'Cogent3 Workshop 2023 environment is ready!'",
   }
