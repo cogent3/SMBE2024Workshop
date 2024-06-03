@@ -29,8 +29,8 @@ You can configure the resource used for the development container by modifying t
 Steps
 
 - Open the devcontainer.json file in your editor.
-- Look for the runArgs property. by default it is set to `    "runArgs": ["--cpus", "1", "-m", "4g"],`, which is 1 cpu and 4GB of RAM.
-- To limit the number of CPUs the container can use, add "--cpus" and "2" (or your desired number of CPUs) to the runArgs array.
+- Look for the runArgs property. by default it is set to `    "runArgs": ["--cpus", "2", "-m", "4g"],`, which is 2 cpu and 4GB of RAM.
+- To limit the number of CPUs the container can use, add "--cpus" and your desired number of CPUs to the runArgs array.
 - To limit the amount of RAM the container can use, add "-m" and "4g" (or your desired amount of RAM) to the runArgs array.
 
 Please note that these settings will only limit the maximum resources a container can use. The container will use less resources if it doesn't need the maximum amount.  Also, please make sure that your Docker host has enough resources to allocate to the container. If the host doesn't have enough resources, the container may not start.
