@@ -23,8 +23,8 @@ jobs:
             -t ghcr.io/${{ github.repository_owner }}/cogent3-workshop:latest
           docker push ghcr.io/${{ github.repository_owner }}/cogent3-workshop:latest
 
-      - name: Build and Push Prepopulated Docker image
+      - name: Build and Push Docker image prepopulated with apes_112
         run: |
-          docker build -f .devcontainer/Dockerfile.prepopulated . \
-            -t ghcr.io/${{ github.repository_owner }}/cogent3-workshop:prepopulated
-          docker push ghcr.io/${{ github.repository_owner }}/cogent3-workshop:prepopulated
+          docker build -f .devcontainer/Dockerfile.apes_112 . \
+            -t ghcr.io/${{ github.repository_owner }}/cogent3-workshop:apes_112
+          docker push ghcr.io/${{ github.repository_owner }}/cogent3-workshop:apes_112

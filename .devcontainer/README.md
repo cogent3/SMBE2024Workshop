@@ -12,7 +12,7 @@ For instructions on building this Docker image into a container to run the works
 You can choose whether to have the data pre-populated in the `~/data` folder by selecting the appropriate container from the GitHub Container Registry (GHCR).
 
 - **Default Container**: This container does not include prepopulated data. Use the default `devcontainer.json` file with the image set to `ghcr.io/khiron/cogent3-workshop:latest`.
-- **Prepopulated Data Container**: This container includes the data prepopulated in the `~/data` folder. Change the image in the `devcontainer.json` file to `ghcr.io/khiron/cogent3-workshop:prepopulated`.
+- **Container prepopulated with apes_112**: This container includes the data prepopulated in the `~/data` folder. Change the image in the `devcontainer.json` file to `ghcr.io/khiron/cogent3-workshop:apes_112`.
 
 ### Steps to Switch Containers
 
@@ -20,7 +20,7 @@ You can choose whether to have the data pre-populated in the `~/data` folder by 
 2. To use the default container, ensure the image is set to:
    ```"image": "ghcr.io/khiron/cogent3-workshop:latest"```
 3. To use the prepopulated data container, change the image to:
-   ```"image": "ghcr.io/khiron/cogent3-workshop:prepopulated"```
+   ```"image": "ghcr.io/khiron/cogent3-workshop:apes_112"```
 
 ## Configuring Resource Allocation
 
