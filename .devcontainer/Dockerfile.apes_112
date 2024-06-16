@@ -8,6 +8,7 @@ USER user
 WORKDIR /home/user
 
 RUN echo "Populating data..." && \
+    pwd && \
     mkdir /home/user/data && \
     cp data/apes_112.cfg /home/user/data/  && \
     cd /home/user/data 
