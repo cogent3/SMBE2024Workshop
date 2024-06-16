@@ -3,6 +3,8 @@ FROM continuumio/miniconda3
 
 LABEL maintainer="khiron <https://github.com/khiron>"
 
+RUN conda update --all 
+
 # Install required packages
 RUN apt-get update -q && \
     apt-get install -q -y --no-install-recommends \

@@ -15,7 +15,7 @@
             "path": "zsh"
           }
         },
-        "python.defaultInterpreterPath": "/home/user/.conda/envs/c312/bin/python"
+        "python.defaultInterpreterPath": "/home/user/.conda/envs/c311/bin/python"
       }
     }
   },
