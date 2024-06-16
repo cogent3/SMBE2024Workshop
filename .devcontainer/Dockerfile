@@ -12,6 +12,7 @@ RUN apt-get update -q && \
         curl \
         sudo \
         openssh-client \
+        time \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -38,14 +39,14 @@ RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUS
 # Configure zsh
 RUN sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 
-# Create a new conda environment with Python 3.12
+# Create a new conda environment with Python 3.11
 RUN source /opt/conda/etc/profile.d/conda.sh && \
-    /opt/conda/bin/conda create -n c312 python=3.12 -y && \
-    conda activate c312
+    /opt/conda/bin/conda create -n c311 python=3.11 -y && \
+    conda activate c311
 
 # Initialize conda for zsh shell
 RUN echo "source /opt/conda/etc/profile.d/conda.sh" >> ~/.zshrc && \
-    echo "conda activate c312" >> ~/.zshrc
+    echo "conda activate c311" >> ~/.zshrc
 
 # Clone the repositories using SSH
 WORKDIR /home/user/repos
@@ -54,16 +55,16 @@ RUN git clone --branch develop https://github.com/cogent3/cogent3.git /home/user
 
 # Install flit in the conda environment
 RUN source /opt/conda/etc/profile.d/conda.sh && \
-    conda activate c312 && \
+    conda activate c311 && \
     conda install -c conda-forge flit -y
 
-# Install the repositories using flit
+# Install the repositories using flit --deps production to avoid dev dependencies that conflict (black/isort/click)
 RUN source /opt/conda/etc/profile.d/conda.sh && \
-    conda activate c312 && \
+    conda activate c311 && \
     cd /home/user/repos/cogent3 && \
-    flit install -s && \
+    flit install --deps production -s && \
     cd /home/user/repos/EnsemblLite && \
-    flit install -s
+    flit install --deps production -s
 
 # Start in the home directory
 WORKDIR /home/user
