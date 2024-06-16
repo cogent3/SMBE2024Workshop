@@ -8,17 +8,8 @@ on:
       - Build-container-images-in-workflow
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        include:
-          - dockerfile: Dockerfile
-            image_tag: latest
-          - dockerfile: Dockerfile.prepopulated
-            image_tag: prepopulated
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -27,14 +18,12 @@ jobs:
         run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
 
       - name: Build and Push Base Docker image
-        if: matrix.image_tag == 'latest'
         run: |
           docker build -f .devcontainer/Dockerfile . \
             -t ghcr.io/${{ github.repository_owner }}/cogent3-workshop:latest
           docker push ghcr.io/${{ github.repository_owner }}/cogent3-workshop:latest
 
       - name: Build and Push Prepopulated Docker image
-        if: matrix.image_tag == 'prepopulated'
         run: |
           docker build -f .devcontainer/Dockerfile.prepopulated . \
             -t ghcr.io/${{ github.repository_owner }}/cogent3-workshop:prepopulated
