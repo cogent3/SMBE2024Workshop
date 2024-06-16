@@ -21,7 +21,7 @@ RUN useradd -m user && \
 
 # Switch to the non-root user
 USER user
-WORKDIR /home/user
+WORKDIR /home/user 
 
 # Set up zsh as the default shell
 SHELL ["/bin/zsh", "-c"]
