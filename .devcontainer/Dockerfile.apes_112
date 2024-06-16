@@ -5,7 +5,6 @@ LABEL maintainer="khiron <https://github.com/khiron>"
 
 # Populate data
 USER user
-WORKDIR /home/user
 
 RUN echo "Populating data..." && \
     pwd && \
