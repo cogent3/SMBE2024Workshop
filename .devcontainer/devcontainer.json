@@ -24,5 +24,7 @@
   "mounts": [
     "source=${localEnv:HOME}/.ssh,target=/home/user/.ssh,type=bind,consistency=cached",
     "source=${localEnv:USERPROFILE}/.ssh,target=/home/user/.ssh,type=bind,consistency=cached"
-  ]
+  ],
+  "updateContentCommand": "docker pull ghcr.io/khiron/cogent3-workshop:latest"
+
 }

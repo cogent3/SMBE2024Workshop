@@ -18,9 +18,15 @@ You can choose whether to have the data pre-populated in the `~/data` folder by 
 
 1. Open the `devcontainer.json` file in your editor.
 2. To use the default container, ensure the image is set to:
-   ```"image": "ghcr.io/khiron/cogent3-workshop:latest"```
+   ``"image": "ghcr.io/khiron/cogent3-workshop:latest"``
 3. To use the prepopulated data container, change the image to:
-   ```"image": "ghcr.io/khiron/cogent3-workshop:apes_112"```
+   ``"image": "ghcr.io/khiron/cogent3-workshop:apes_112"``
+
+4. Add the following `updateContentCommand` to ensure the latest image is pulled:
+   ``"updateContentCommand": "docker pull ghcr.io/khiron/cogent3-workshop:latest"``
+   or
+   ``"updateContentCommand": "docker pull ghcr.io/khiron/cogent3-workshop:apes_112"`` if you are pre-populating the container with data 
+
 
 ## Configuring Resource Allocation
 
