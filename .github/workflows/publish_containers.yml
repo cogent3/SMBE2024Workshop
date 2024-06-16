@@ -26,10 +26,16 @@ jobs:
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
 
-      - name: Build Docker image
+      - name: Build and Push Base Docker image
+        if: matrix.image_tag == 'latest'
         run: |
-          docker build -f .devcontainer/${{ matrix.dockerfile }} . \
-            -t ghcr.io/${{ github.repository_owner }}/cogent3-workshop:${{ matrix.image_tag }}
+          docker build -f .devcontainer/Dockerfile . \
+            -t ghcr.io/${{ github.repository_owner }}/cogent3-workshop:latest
+          docker push ghcr.io/${{ github.repository_owner }}/cogent3-workshop:latest
 
-      - name: Push Docker image
-        run: docker push ghcr.io/${{ github.repository_owner }}/cogent3-workshop:${{ matrix.image_tag }}
+      - name: Build and Push Prepopulated Docker image
+        if: matrix.image_tag == 'prepopulated'
+        run: |
+          docker build -f .devcontainer/Dockerfile.prepopulated . \
+            -t ghcr.io/${{ github.repository_owner }}/cogent3-workshop:prepopulated
+          docker push ghcr.io/${{ github.repository_owner }}/cogent3-workshop:prepopulated
