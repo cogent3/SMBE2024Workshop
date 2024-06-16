@@ -6,10 +6,13 @@ LABEL maintainer="khiron <https://github.com/khiron>"
 # Populate data
 USER user
 
+# Ensure the data directory exists
+RUN mkdir -p /home/user/data
+
+# copy the config from the build context into the user data folder
+COPY data/apes_112.cfg /home/user/data/
+
 RUN echo "Populating data..." && \
-    pwd && \
-    mkdir /home/user/data && \
-    cp data/apes_112.cfg /home/user/data/  && \
     cd /home/user/data 
     # /usr/bin/time -v ensembl_cli download -c apes_112.cfg -d ensembl
     # /usr/bin/time -v ensembl_cli download -c apes_112.cfg -d ensembl
