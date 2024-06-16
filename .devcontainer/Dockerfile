@@ -41,28 +41,28 @@ RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUS
 # Configure zsh
 RUN sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 
-# Create a new conda environment with Python 3.11
+# Create a new conda environment with Python 3.12
 RUN source /opt/conda/etc/profile.d/conda.sh && \
-    /opt/conda/bin/conda create -n c311 python=3.11 -y && \
-    conda activate c311
+    /opt/conda/bin/conda create -n c312 python=3.12 -y && \
+    conda activate c312
 
 # Initialize conda for zsh shell
 RUN echo "source /opt/conda/etc/profile.d/conda.sh" >> ~/.zshrc && \
-    echo "conda activate c311" >> ~/.zshrc
+    echo "conda activate c312" >> ~/.zshrc
 
 # Clone the repositories using SSH
 WORKDIR /home/user/repos
 RUN git clone --branch develop https://github.com/cogent3/cogent3.git /home/user/repos/cogent3 && \
-    git clone --branch master https://github.com/cogent3/EnsemblLite.git /home/user/repos/EnsemblLite
+    git clone --branch develop https://github.com/cogent3/EnsemblLite.git /home/user/repos/EnsemblLite
 
 # Install flit in the conda environment
 RUN source /opt/conda/etc/profile.d/conda.sh && \
-    conda activate c311 && \
+    conda activate c312 && \
     conda install -c conda-forge flit -y
 
 # Install the repositories using flit --deps production to avoid dev dependencies that conflict (black/isort/click)
 RUN source /opt/conda/etc/profile.d/conda.sh && \
-    conda activate c311 && \
+    conda activate c312 && \
     cd /home/user/repos/cogent3 && \
     flit install --deps production -s && \
     cd /home/user/repos/EnsemblLite && \
