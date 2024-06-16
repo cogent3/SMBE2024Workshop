@@ -1,0 +1,17 @@
+# Use the base image
+FROM ghcr.io/khiron/cogent3-workshop:latest
+
+LABEL maintainer="khiron <https://github.com/khiron>"
+
+# Populate data
+USER user
+WORKDIR /home/user
+
+RUN echo "Populating data..." && \
+    mkdir /home/user/data
+
+# Start in the home directory
+WORKDIR /home/user
+
+# Set zsh as the default shell for the container
+CMD [ "zsh" ]

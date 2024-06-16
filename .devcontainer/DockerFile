@@ -1,7 +1,7 @@
 # Use continuumio/miniconda3 as the base image
 FROM continuumio/miniconda3
 
-LABEL maintainer="Richard Morris <richard.morris@anu.edu.au>"
+LABEL maintainer="khiron <https://github.com/khiron>"
 
 # Install required packages
 RUN apt-get update -q && \
@@ -43,21 +43,20 @@ RUN source /opt/conda/etc/profile.d/conda.sh && \
     /opt/conda/bin/conda create -n c312 python=3.12 -y && \
     conda activate c312
 
-
 # Initialize conda for zsh shell
 RUN echo "source /opt/conda/etc/profile.d/conda.sh" >> ~/.zshrc && \
     echo "conda activate c312" >> ~/.zshrc
 
 # Clone the repositories using SSH
 WORKDIR /home/user/repos
-RUN git clone --branch develop https://github.com/cogent3/cogent3.git /home/$USERNAME/repos/cogent3 && \
-    git clone --branch master https://github.com/cogent3/EnsemblLite.git /home/$USERNAME/repos/EnsemblLite
+RUN git clone --branch develop https://github.com/cogent3/cogent3.git /home/user/repos/cogent3 && \
+    git clone --branch master https://github.com/cogent3/EnsemblLite.git /home/user/repos/EnsemblLite
 
 # Install flit in the conda environment
 RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate c312 && \
     conda install -c conda-forge flit -y
-    
+
 # Install the repositories using flit
 RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate c312 && \
@@ -66,7 +65,7 @@ RUN source /opt/conda/etc/profile.d/conda.sh && \
     cd /home/user/repos/EnsemblLite && \
     flit install -s
 
-# Start in the home directory     
+# Start in the home directory
 WORKDIR /home/user
 
 # Set zsh as the default shell for the container
