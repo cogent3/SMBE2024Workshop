@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - Build-container-images-in-workflow
 
 jobs:
   build:
