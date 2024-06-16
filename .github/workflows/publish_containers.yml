@@ -16,8 +16,6 @@ jobs:
         include:
           - dockerfile: Dockerfile
             image_tag: latest
-          - dockerfile: Dockerfile.prepopulated
-            image_tag: prepopulated
 
     steps:
       - name: Checkout repository
@@ -33,9 +31,3 @@ jobs:
             -t ghcr.io/${{ github.repository_owner }}/cogent3-workshop:latest
           docker push ghcr.io/${{ github.repository_owner }}/cogent3-workshop:latest
 
-      - name: Build and Push Prepopulated Docker image
-        if: matrix.image_tag == 'prepopulated'
-        run: |
-          docker build -f .devcontainer/Dockerfile.prepopulated . \
-            -t ghcr.io/${{ github.repository_owner }}/cogent3-workshop:prepopulated
-          docker push ghcr.io/${{ github.repository_owner }}/cogent3-workshop:prepopulated
