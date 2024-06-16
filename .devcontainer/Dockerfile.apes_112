@@ -9,7 +9,7 @@ WORKDIR /home/user
 
 RUN echo "Populating data..." && \
     mkdir /home/user/data && \
-    cp /data/apes_112.cfg /home/user/data/  && \
+    cp data/apes_112.cfg /home/user/data/  && \
     cd /home/user/data 
     # /usr/bin/time -v ensembl_cli download -c apes_112.cfg -d ensembl
     # /usr/bin/time -v ensembl_cli download -c apes_112.cfg -d ensembl
