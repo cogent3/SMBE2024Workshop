@@ -13,11 +13,9 @@ RUN mkdir -p /home/user/data
 COPY data/apes_112.cfg /home/user/data/
 
 RUN echo "Populating data..." && \
-    conda init && \
-    conda activate c312 && \
-    /usr/bin/time -v elt download -c /home/user/data/apes_112.cfg && \
-    /usr/bin/time -v elt install -d /home/user/data/apes_112/download_112 -np 2 -f && \
-    /usr/bin/time -v elt homologs -i /home/user/data/apes_112/install_112 --ref human --limit 20 -np 2 -o sampled-20
+    /usr/bin/time -v /home/user/.conda/envs/c312/bin/elt download -c /home/user/data/apes_112.cfg && \
+    /usr/bin/time -v /home/user/.conda/envs/c312/bin/elt install -d /home/user/data/apes_112/download_112 -np 2 -f && \
+    /usr/bin/time -v /home/user/.conda/envs/c312/bin/elt homologs -i /home/user/data/apes_112/install_112 --ref human --limit 20 -np 2 -o sampled-20
 
 # Start in the home directory
 WORKDIR /home/user
