@@ -12,11 +12,10 @@ RUN mkdir -p /home/user/data
 # copy the config from the build context into the user data folder
 COPY data/apes_112.cfg /home/user/data/
 
-# RUN echo "Populating data..." && \
-#     cd /home/user/data && \
-#     /usr/bin/time -v elt download -c apes_112.cfg && \
-#     /usr/bin/time -v elt install -d apes_112/download_112 -np 2 -f && \
-#     /usr/bin/time -v elt homologs -i apes_112/install_112 --ref human --limit 20 -np 2 -o sampled-20
+RUN echo "Populating data..." && \
+    /usr/bin/time -v elt download -c /home/user/data/apes_112.cfg && \
+    /usr/bin/time -v elt install -d /home/user/data/apes_112/download_112 -np 2 -f && \
+    /usr/bin/time -v elt homologs -i /home/user/data/apes_112/install_112 --ref human --limit 20 -np 2 -o sampled-20
 
 # Start in the home directory
 WORKDIR /home/user
