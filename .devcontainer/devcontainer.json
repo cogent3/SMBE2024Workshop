@@ -1,24 +1,30 @@
 {
-    "name": "Cogent3 Workshop",
-    "build": {
-      "dockerfile": "Dockerfile",
-      "context": ".."
-    },    
-    "runArgs": ["--cpus", "2", "-m", "4g"],
-    "
-    settings": {
-      "terminal.integrated.defaultProfile.linux": "zsh",
-      "terminal.integrated.profiles.linux": {
-        "zsh": {
-          "path": "zsh"
-        }
-      },
-      "python.defaultInterpreterPath": "/home/user/.conda/envs/c312/bin/python",
-    },
-    "extensions": [
-      "ms-python.python",
-      "ms-toolsai.jupyter"
-    ],
-    "remoteUser": "user",
-    "postStartCommand": "echo 'Cogent3 Workshop 2024 environment is ready!'"
-  }
+  "name": "Cogent3 Workshop",
+  "image": "ghcr.io/khiron/cogent3-workshop:latest",
+  "runArgs": ["--cpus", "2", "-m", "4g"],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "zsh"
+          }
+        },
+        "python.defaultInterpreterPath": "/home/user/.conda/envs/c312/bin/python"
+      }
+    }
+  },
+  "remoteUser": "user",
+  "workspaceFolder": "/home/user/workshop",
+  "postStartCommand": "chown -R user:user /home/user/.ssh && echo 'Cogent3 Workshop 2024 environment is ready!'",
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/user/.ssh,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder},target=/home/user/workshop,type=bind,consistency=cached"
+  ],
+  "updateContentCommand": "docker pull ghcr.io/khiron/cogent3-workshop:latest"
+}
