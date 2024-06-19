@@ -74,5 +74,8 @@ WORKDIR /home/user
 # copy the data directory to ~/data
 COPY data /home/user/data
 
+# set ownership of ~/data to user
+run chown -R user:user /home/user/
+
 # Set zsh as the default shell for the container
 CMD [ "zsh" ]
