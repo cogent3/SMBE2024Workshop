@@ -20,11 +20,11 @@ jobs:
       - name: Build and Push Base Docker image
         run: |
           docker build -f .devcontainer/Dockerfile . \
-            -t ghcr.io/${{ github.repository_owner }}/cogent3-workshop:latest
-          docker push ghcr.io/${{ github.repository_owner }}/cogent3-workshop:latest
+            -t ghcr.io/${{ github.repository_owner }}/workshop:latest
+          docker push ghcr.io/${{ github.repository_owner }}/workshop:latest
 
       - name: Build and Push Docker image prepopulated with apes_112
         run: |
           docker build -f .devcontainer/Dockerfile.apes_112 . \
-            -t ghcr.io/${{ github.repository_owner }}/cogent3-workshop:apes_112
-          docker push ghcr.io/${{ github.repository_owner }}/cogent3-workshop:apes_112
+            -t ghcr.io/${{ github.repository_owner }}/workshop:apes_112
+          docker push ghcr.io/${{ github.repository_owner }}/workshop:apes_112
