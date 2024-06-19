@@ -3,9 +3,6 @@ FROM ghcr.io/cogent3/workshop:latest
 
 LABEL maintainer="khiron <https://github.com/khiron>"
 
-# Populate data
-USER user
-
 # Ensure the data directory exists
 RUN mkdir -p /home/user/data
 
