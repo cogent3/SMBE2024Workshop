@@ -1,7 +1,9 @@
 # Use continuumio/miniconda3 as the base image
 FROM continuumio/miniconda3
 
-LABEL maintainer="Richard Morris <richard.morris@anu.edu.au>"
+LABEL maintainer="khiron <https://github.com/khiron>"
+
+RUN conda update --all 
 
 # Install required packages
 RUN apt-get update -q && \
@@ -12,6 +14,7 @@ RUN apt-get update -q && \
         curl \
         sudo \
         openssh-client \
+        time \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -21,7 +24,7 @@ RUN useradd -m user && \
 
 # Switch to the non-root user
 USER user
-WORKDIR /home/user
+WORKDIR /home/user 
 
 # Set up zsh as the default shell
 SHELL ["/bin/zsh", "-c"]
@@ -43,31 +46,36 @@ RUN source /opt/conda/etc/profile.d/conda.sh && \
     /opt/conda/bin/conda create -n c312 python=3.12 -y && \
     conda activate c312
 
-
 # Initialize conda for zsh shell
 RUN echo "source /opt/conda/etc/profile.d/conda.sh" >> ~/.zshrc && \
     echo "conda activate c312" >> ~/.zshrc
 
 # Clone the repositories using SSH
 WORKDIR /home/user/repos
-RUN git clone --branch develop https://github.com/cogent3/cogent3.git /home/$USERNAME/repos/cogent3 && \
-    git clone --branch master https://github.com/cogent3/EnsemblLite.git /home/$USERNAME/repos/EnsemblLite
+RUN git clone --branch develop https://github.com/cogent3/cogent3.git /home/user/repos/cogent3 && \
+    git clone --branch develop https://github.com/cogent3/EnsemblLite.git /home/user/repos/EnsemblLite
 
 # Install flit in the conda environment
 RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate c312 && \
     conda install -c conda-forge flit -y
-    
-# Install the repositories using flit
+
+# Install the repositories using flit --deps production to avoid dev dependencies that conflict (black/isort/click)
 RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate c312 && \
     cd /home/user/repos/cogent3 && \
-    flit install -s && \
+    flit install --deps production -s && \
     cd /home/user/repos/EnsemblLite && \
-    flit install -s
+    flit install --deps production -s
 
-# Start in the home directory     
+# Start in the home directory
 WORKDIR /home/user
+
+# copy the data directory to ~/data
+COPY data /home/user/data
+
+# set ownership of ~/data to user
+RUN sudo chown -R user:user /home/user/
 
 # Set zsh as the default shell for the container
 CMD [ "zsh" ]
