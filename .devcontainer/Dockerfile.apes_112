@@ -9,9 +9,8 @@ RUN mkdir -p /home/user/data
 # copy the config from the build context into the user data folder
 COPY data/apes_112.cfg /home/user/data/
 
-RUN echo "Populating data..." && \
-    /usr/bin/time -v /home/user/.conda/envs/c312/bin/elt download -c /home/user/data/apes_112.cfg 
-    # && \
+#RUN echo "Populating data..." && \
+    # /usr/bin/time -v /home/user/.conda/envs/c312/bin/elt download -c /home/user/data/apes_112.cfg && \
     # /usr/bin/time -v /home/user/.conda/envs/c312/bin/elt install -d /home/user/data/apes_112/download_112 -np 2 -f && \
     # /usr/bin/time -v /home/user/.conda/envs/c312/bin/elt homologs -i /home/user/data/apes_112/install_112 --ref human --limit 20 -np 2 -o sampled-20
 
