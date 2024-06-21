@@ -71,5 +71,11 @@ RUN source /opt/conda/etc/profile.d/conda.sh && \
 # Start in the home directory
 WORKDIR /home/user
 
+# copy the data directory to ~/data
+COPY data /home/user/data
+
+# set ownership of ~/data to user
+RUN sudo chown -R user:user /home/user/
+
 # Set zsh as the default shell for the container
 CMD [ "zsh" ]
