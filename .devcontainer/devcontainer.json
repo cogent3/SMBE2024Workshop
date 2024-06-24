@@ -1,7 +1,7 @@
 {
   "name": "Cogent3 Workshop",
-  "dockerFile": "Dockerfile",
-  "runArgs": ["--cpus", "2", "-m", "4g"],
+  "dockerComposeFile": ".devcontainer/docker-compose.yml",
+  "service": "devcontainer",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -21,8 +21,5 @@
   },
   "remoteUser": "user",
   "workspaceFolder": "/home/user/workshop",
-  "postStartCommand": "chown -R user:user /home/user/.ssh && echo 'Cogent3 Workshop 2024 environment is ready!'",
-  "mounts": [
-    "source=${localWorkspaceFolder},target=/home/user/workshop,type=bind,consistency=cached"
-  ],
+  "postStartCommand": "chown -R user:user /home/user/.ssh && echo 'Cogent3 Workshop 2024 environment is ready!'"
 }
