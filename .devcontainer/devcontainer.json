@@ -1,6 +1,6 @@
 {
   "name": "Cogent3 Workshop",
-  "dockerComposeFile": ".devcontainer/docker-compose.yml",
+  "dockerComposeFile": "docker-compose.yml",
   "service": "devcontainer",
   "customizations": {
     "vscode": {

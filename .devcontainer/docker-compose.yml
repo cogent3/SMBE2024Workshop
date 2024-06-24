@@ -15,4 +15,4 @@ services:
           cpus: '1.0'
           memory: '2g'
     volumes:
-      - ${localWorkspaceFolder}:/home/user/workshop:cached
+      - ..:/home/user/workshop:cached
