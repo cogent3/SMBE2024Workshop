@@ -58,7 +58,7 @@ RUN git clone --branch develop https://github.com/cogent3/cogent3.git /home/user
 # Install flit in the conda environment
 RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate c312 && \
-    conda install -c conda-forge flit -y
+    conda install -c conda-forge flit h5py -y
 
 # Install the repositories using flit --deps production to avoid dev dependencies that conflict (black/isort/click)
 RUN source /opt/conda/etc/profile.d/conda.sh && \
@@ -70,9 +70,6 @@ RUN source /opt/conda/etc/profile.d/conda.sh && \
 
 # Start in the home directory
 WORKDIR /home/user
-
-# copy the data directory to ~/data
-COPY data /home/user/data
 
 # set ownership of ~/data to user
 RUN sudo chown -R user:user /home/user/

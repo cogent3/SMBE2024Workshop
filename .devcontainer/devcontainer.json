@@ -1,6 +1,6 @@
 {
   "name": "Cogent3 Workshop",
-  "image": "ghcr.io/cogent3/workshop:latest",
+  "dockerFile": "Dockerfile",
   "runArgs": ["--cpus", "2", "-m", "4g"],
   "customizations": {
     "vscode": {
@@ -23,8 +23,6 @@
   "workspaceFolder": "/home/user/workshop",
   "postStartCommand": "chown -R user:user /home/user/.ssh && echo 'Cogent3 Workshop 2024 environment is ready!'",
   "mounts": [
-    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/user/.ssh,type=bind,consistency=cached",
     "source=${localWorkspaceFolder},target=/home/user/workshop,type=bind,consistency=cached"
   ],
-  "updateContentCommand": "docker pull ghcr.io/cogent3/workshop:latest"
 }
