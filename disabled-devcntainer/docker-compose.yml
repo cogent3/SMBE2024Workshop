@@ -1,18 +1,18 @@
 # .devcontainer/docker-compose.yml
-version: '3.8'
 services:
   devcontainer:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
-    shm_size: '2gb'
+    shm_size: 2gb
+    tty: true
+    volumes:
+      - ..:/home/user/workshop:cached
     deploy:
       resources:
         limits:
-          cpus: '2.0'
-          memory: '4g'
+          cpus: '0.25'
+          memory: 4g
         reservations:
-          cpus: '1.0'
-          memory: '2g'
-    volumes:
-      - ..:/home/user/workshop:cached
+          cpus: '0.25'
+          memory: 4g

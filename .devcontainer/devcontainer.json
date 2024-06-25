@@ -1,7 +1,6 @@
 {
   "name": "Cogent3 Workshop",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "devcontainer",
+  "dockerFile": "Dockerfile",
   "workspaceFolder": "/home/user/workshop",
   "customizations": {
     "vscode": {
@@ -20,6 +19,9 @@
       }
     }
   },
-  "remoteUser": "user"
+  "remoteUser": "user",
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/home/user/workshop,type=bind,consistency=cached"
+  ]
 }
 
