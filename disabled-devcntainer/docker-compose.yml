@@ -5,7 +5,6 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
-    tty: true
     shm_size: '2gb'
     deploy:
       resources:

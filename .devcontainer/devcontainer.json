@@ -2,6 +2,7 @@
   "name": "Cogent3 Workshop",
   "dockerComposeFile": "docker-compose.yml",
   "service": "devcontainer",
+  "workspaceFolder": "/home/user/workshop",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -19,7 +20,6 @@
       }
     }
   },
-  "remoteUser": "user",
-  "workspaceFolder": "/home/user/workshop",
-  "postStartCommand": "chown -R user:user /home/user/.ssh && echo 'Cogent3 Workshop 2024 environment is ready!'"
+  "remoteUser": "user"
 }
+
