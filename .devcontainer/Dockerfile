@@ -11,6 +11,7 @@ RUN apt-get update -q && \
         git \
         zsh \
         wget \
+        less \
         curl \
         sudo \
         openssh-client \
@@ -47,7 +48,8 @@ RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate c312
 
 # Initialize conda for zsh shell
-RUN echo "source /opt/conda/etc/profile.d/conda.sh" >> ~/.zshrc
+RUN echo "source /opt/conda/etc/profile.d/conda.sh" >> ~/.zshrc && \
+   echo "conda activate c312" >> ~/.zshrc
 
 # Clone the repositories using https, limit depth
 WORKDIR /home/user/repos
