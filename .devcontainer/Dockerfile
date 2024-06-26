@@ -47,8 +47,7 @@ RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate c312
 
 # Initialize conda for zsh shell
-RUN echo "source /opt/conda/etc/profile.d/conda.sh" >> ~/.zshrc && \
-    echo "conda activate c312" >> ~/.zshrc
+RUN echo "source /opt/conda/etc/profile.d/conda.sh" >> ~/.zshrc
 
 # Clone the repositories using SSH
 WORKDIR /home/user/repos
