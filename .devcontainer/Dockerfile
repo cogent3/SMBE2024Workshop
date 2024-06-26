@@ -59,14 +59,16 @@ RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate c312 && \
     conda install -c conda-forge flit h5py -y
 
-# Install the repositories using flit --deps production to avoid dev dependencies that conflict (black/isort/click)
+# We use pip to install so we get plotly etc.. but also install
+# other packages required for using jupyter notebooks
 RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate c312 && \
-    cd /home/user/repos/cogent3 && \
-    flit install --deps production -s && \
+    pip install ipykernel nbformat && \
+    cd /home/user/repos/Cogent3 && \
+    pip install -e ".[extra]" && \
     cd /home/user/repos/EnsemblLite && \
-    flit install --deps production -s
-
+    pip install -e .
+ 
 # Start in the home directory
 WORKDIR /home/user
 
