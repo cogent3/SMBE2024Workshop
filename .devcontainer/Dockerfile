@@ -11,6 +11,7 @@ RUN apt-get update -q && \
         git \
         zsh \
         wget \
+        less \
         curl \
         sudo \
         openssh-client \
@@ -51,28 +52,28 @@ RUN source /opt/conda/etc/profile.d/conda.sh && \
 
 # Initialize conda for zsh shell
 RUN echo "source /opt/conda/etc/profile.d/conda.sh" >> ~/.zshrc && \
-    echo "conda activate c312" >> ~/.zshrc
+   echo "conda activate c312" >> ~/.zshrc
 
-# Clone the repositories using SSH
-RUN git clone --branch develop https://github.com/cogent3/cogent3.git /home/user/repos/cogent3 && \
-    git clone --branch develop https://github.com/cogent3/EnsemblLite.git /home/user/repos/EnsemblLite
+# Clone the repositories using https, limit depth
+WORKDIR /home/user/repos
+RUN git clone --single-branch --branch develop --depth 1 https://github.com/cogent3/cogent3.git /home/user/repos/Cogent3 && \
+    git clone --single-branch --branch develop --depth 1 https://github.com/cogent3/EnsemblLite.git /home/user/repos/EnsemblLite
 
 # Install flit in the conda environment
 RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate c312 && \
     conda install -c conda-forge flit h5py -y
 
-# Install the repositories using flit --deps production to avoid dev dependencies that conflict (black/isort/click)
+# We use pip to install so we get plotly etc.. but also install
+# other packages required for using jupyter notebooks
 RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate c312 && \
-    cd /home/user/repos/cogent3 && \
-    flit install --deps production -s && \
+    pip install ipykernel nbformat && \
+    cd /home/user/repos/Cogent3 && \
+    pip install -e ".[extra]" && \
     cd /home/user/repos/EnsemblLite && \
-    flit install --deps production -s
-
-# download the data - not the ~/workshop directory does not exist until it is mounted in the container by devcontainer.json
-RUN wget -P /home/user/data https://www.dropbox.com/scl/fi/60etoj9omxm5579e6z1fy/database.sqlite.zip
-
+    pip install -e .
+ 
 # Start in the home directory
 WORKDIR /home/user
 
