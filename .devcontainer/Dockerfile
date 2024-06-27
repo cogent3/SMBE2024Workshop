@@ -15,6 +15,9 @@ RUN apt-get update -q && \
         sudo \
         openssh-client \
         time \
+        zip \
+        unzip \
+        pigz \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -51,7 +54,6 @@ RUN echo "source /opt/conda/etc/profile.d/conda.sh" >> ~/.zshrc && \
     echo "conda activate c312" >> ~/.zshrc
 
 # Clone the repositories using SSH
-WORKDIR /home/user/repos
 RUN git clone --branch develop https://github.com/cogent3/cogent3.git /home/user/repos/cogent3 && \
     git clone --branch develop https://github.com/cogent3/EnsemblLite.git /home/user/repos/EnsemblLite
 
@@ -67,6 +69,9 @@ RUN source /opt/conda/etc/profile.d/conda.sh && \
     flit install --deps production -s && \
     cd /home/user/repos/EnsemblLite && \
     flit install --deps production -s
+
+# download the data - not the ~/workshop directory does not exist until it is mounted in the container by devcontainer.json
+RUN wget -P /home/user/data https://www.dropbox.com/scl/fi/60etoj9omxm5579e6z1fy/database.sqlite.zip
 
 # Start in the home directory
 WORKDIR /home/user
