@@ -1,2 +1,3 @@
 # SMBE2024Workshop
-Material for SMBE 2024
+
+For instructions and workshop content, please go to the [wiki](https://github.com/cogent3/SMBE2024Workshop/wiki).
