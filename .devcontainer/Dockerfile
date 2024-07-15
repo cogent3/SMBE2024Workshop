@@ -68,7 +68,7 @@ RUN source /opt/conda/etc/profile.d/conda.sh && \
 # other packages required for using jupyter notebooks
 RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate c312 && \
-    pip install ipykernel nbformat && \
+    pip install ipykernel nbformat ipywidgets && \
     cd /home/user/repos/Cogent3 && \
     pip install -e ".[extra]" && \
     cd /home/user/repos/EnsemblLite && \
